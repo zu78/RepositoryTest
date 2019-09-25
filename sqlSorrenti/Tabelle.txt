@@ -97,3 +97,31 @@ CREATE TABLE public.societa
     p_iva character varying COLLATE pg_catalog."default",
     CONSTRAINT "Societa_pkey" PRIMARY KEY (id)
 )
+
+
+CREATE TABLE public.dipendente_progetto
+(
+    id integer NOT NULL DEFAULT nextval('dipendente_progetto_id_seq'::regclass),
+    id_dipendente integer,
+    id_progetto integer,
+    data_inizio date,
+    data_fine date,
+    CONSTRAINT dipendente_progetto_pkey PRIMARY KEY (id),
+    CONSTRAINT id_dipendente FOREIGN KEY (id_dipendente)
+        REFERENCES public.dipendente (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT id_progetto FOREIGN KEY (id_progetto)
+        REFERENCES public.progetto (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+CREATE TABLE public.progetto
+(
+    id integer NOT NULL DEFAULT nextval('progetto_id_seq'::regclass),
+    nome character varying COLLATE pg_catalog."default",
+    commessa character varying COLLATE pg_catalog."default",
+    id_dipendente integer,
+    CONSTRAINT progetto_pkey PRIMARY KEY (id)
+)
