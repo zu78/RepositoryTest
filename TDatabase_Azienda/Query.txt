@@ -1,0 +1,27 @@
+SELECT dipendente.cf, dipendente.matricola, dipendente.nome, dipendente.cognome, dipendente.data_nascita, societa.nome_societa 
+FROM (((dipendente 
+INNER JOIN area_dipendente ON dipendente.id = area_dipendente.id_dipendente)
+INNER JOIN area ON area_dipendente.id_area = area.id )
+INNER JOIN societa ON societa.id = area.id_societa );
+
+
+SELECT societa.nome_societa, COUNT(*) as numero_dipendenti
+FROM societa, area, area_dipendente, dipendente 
+WHERE societa.id = area.id_societa AND area_dipendente.id_area = area.id AND dipendente.id = area_dipendente.id_dipendente 
+GROUP BY societa.nome_societa
+
+
+SELECT DISTINCT dipendente.nome, dipendente.cognome, dipendente.matricola
+FROM dipendente WHERE dipendente.id NOT IN
+(SELECT dipendente.id FROM dipendente, auto_dipendente as auto WHERE auto.id_dipendente = dipendente.id)
+
+SELECT dipendente.cf, CAST(SUBSTRING(cf,10,2) as INTEGER ) sesso 
+FROM dipendente
+
+
+SELECT dipendente.cf, dipendente.matricola, dipendente.nome, dipendente.cognome, dipendente.data_nascita, societa.nome_societa, 
+CASE WHEN CAST(SUBSTRING(cf,10,2)as int)<40 THEN 'maschio' ELSE 'femmina' END AS sesso
+FROM (((dipendente 
+INNER JOIN area_dipendente ON dipendente.id = area_dipendente.id_dipendente)
+INNER JOIN area ON area_dipendente.id_area = area.id )
+INNER JOIN societa ON societa.id = area.id_societa );

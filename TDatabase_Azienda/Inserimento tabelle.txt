@@ -1,0 +1,56 @@
+INSERT INTO public."Societa"(
+	 nome_societa, p_iva)
+	VALUES 
+	('Almaviva', 'KFL12345'),
+	('AlmaWave', 'VRSV9876');
+
+INSERT INTO public."Comune"(
+	 citta)
+	VALUES  
+	('Milano'),
+	('Roma'),
+	('Napoli');
+
+INSERT INTO public."Area"(
+	nome, descrizione, id_societa)
+	VALUES
+	('Analisi MetaDati', 'Analisi dati statistici di e-commerce in scala regionale', 1),
+	('Sincronizzazione Difesa', 'Sviluppo, aggiornamento e manutenzione di software per la trasmissione dati in modo sicuro per le forze dell ordine', 1),
+	('Comunicazioni Aziendali Interne', 'Registrazione e gestione comunicazioni per i dipendenti',2),
+	('Aziende Associate', 'Gestione collaborazioni e managment delle risorse',2);
+
+INSERT INTO public."Dipendente"(
+	cf, matricola, nome, cognome, luogo_nascita, data_nascita, c_residenza, via)
+	VALUES 
+	('TRNGRG99M06L182C', '1234', 'Giorgio', 'Tranquilli', 1, '06-08-1999', 1, 'Delle Giunchiglie'),
+	('GTMKIE43K08N284L', '1235', 'Spencer', 'Polistrato', 3, '08-12-1989', 2, 'Degli ALmanacchi'),
+	('DSTRNT99M11P123R', '1236', 'Renato', 'De Sanctis', 1, '11-08-1999', 2, 'Di Soralella'),
+	('BRNLRZ99L23O541K', '1237', 'Lorenzo', 'Brondi', 2, '23-01-1999', 3, 'Delle Stanze Cupe'),
+	('SRNMNL94L10M321C', '1238', 'Manuel', 'Sorrenti', 2, '02-09-1999', 1, 'Della Vainta');
+
+INSERT INTO public."Dipendente_Studio"(
+	titolo, id_dipendente, anno_conseguimento, votazione, note)
+	VALUES 
+	('Dottore incapace', 5, '12-12-2010', 94, ' '),
+	('Perito Informatico', 4, '12-12-2015', 77, ' '),
+	('Perito informatico', 3, '12-12-2015', 62, ' '),
+	('Perito informatico', 2, '12-12-2015', 75, ' '),
+	('Perito informatico', 1, '12-12-2015', 92, ' ');
+
+INSERT INTO public."Auto_Dipendente"(
+	id_dipendente, targa, cilindrata, modello, marca)
+	VALUES 
+	(1, 'BE881ED', 1200, '206', 'Pegeut'),
+	(2, 'TR345TR', 1400, '500', 'Fiat'),
+	(1, 'SE123XD', 1500, '207', 'Pegeut');
+
+INSERT INTO public."Area_Dipendente"(
+	id_dipendente, id_area, anno_inizio, anno_fine)
+	VALUES 
+	(1, 1, '20-08-2019', '20-08-2023'),
+	(2, 1, '20-08-2019', '20-08-2023'),
+	(3, 1, '20-08-2019', '20-08-2023'),
+	(5, 1, '19-08-2019', '20-08-2023'),
+	(4, 1, '20-08-2019', '20-08-2023');
+
+

@@ -1,0 +1,89 @@
+CREATE TABLE public."area"
+(
+    id integer NOT NULL DEFAULT nextval('"Area_id_seq"'::regclass),
+    nome character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    descrizione text COLLATE pg_catalog."default",
+    id_societa integer NOT NULL,
+    CONSTRAINT "area_pkey" PRIMARY KEY (id),
+    CONSTRAINT "area_id_societa_fkey" FOREIGN KEY (id_societa)
+        REFERENCES public."societa" (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+CREATE TABLE public."comune"
+(
+    id integer NOT NULL DEFAULT nextval('"Comune_id_seq"'::regclass),
+    citta character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT "comune_pkey" PRIMARY KEY (id)
+)
+
+CREATE TABLE public."societa"
+(
+    id integer NOT NULL DEFAULT nextval('"Societa_id_seq"'::regclass),
+    nome_societa character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    p_iva character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT "societa_pkey" PRIMARY KEY (id)
+)
+
+CREATE TABLE public."dipendente"
+(
+    id integer NOT NULL DEFAULT nextval('"Dipendente_id_seq"'::regclass),
+    cf character varying(16) COLLATE pg_catalog."default" NOT NULL,
+    matricola character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    nome character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    cognome character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    luogo_nascita integer,
+    data_nascita date,
+    c_residenza integer NOT NULL,
+    via character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT "dipendente_pkey" PRIMARY KEY (id)
+)
+
+CREATE TABLE public."area_dipendente"
+(
+    id integer NOT NULL DEFAULT nextval('"area_dipendente_id_seq"'::regclass),
+    id_dipendente integer NOT NULL,
+    id_area integer NOT NULL,
+    anno_inizio date NOT NULL,
+    anno_fine date NOT NULL,
+    CONSTRAINT "area_dipendente_pkey" PRIMARY KEY (id),
+    CONSTRAINT "area_dipendente_id_area_fkey" FOREIGN KEY (id_area)
+        REFERENCES public."area" (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT "area_dipendente_id_dipendente_fkey" FOREIGN KEY (id_dipendente)
+        REFERENCES public."dipendente" (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+CREATE TABLE public."auto_dipendente"
+(
+    id integer NOT NULL DEFAULT nextval('"auto_dipendente_id_seq"'::regclass),
+    id_dipendente integer NOT NULL,
+    targa character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    cilindrata integer NOT NULL,
+    modello character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    marca character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT "auto_dipendente_pkey" PRIMARY KEY (id),
+    CONSTRAINT "auto_dipendente_id_dipendente_fkey" FOREIGN KEY (id_dipendente)
+        REFERENCES public."dipendente" (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+CREATE TABLE public."dipendente_studio"
+(
+    id integer NOT NULL DEFAULT nextval('"dipendente_studio_id_seq"'::regclass),
+    titolo character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    id_dipendente integer NOT NULL,
+    anno_conseguimento date NOT NULL,
+    votazione integer NOT NULL,
+    note character varying COLLATE pg_catalog."default",
+    CONSTRAINT "dipendente_studio_pkey" PRIMARY KEY (id),
+    CONSTRAINT "dipendente_studio_id_dipendente_fkey" FOREIGN KEY (id_dipendente)
+        REFERENCES public."dipendente" (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
