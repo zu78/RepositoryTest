@@ -1,0 +1,79 @@
+INSERT INTO public."Dipendente"(
+	 cf, matricola, luogo_nascita, nome, cognome, c_residenza, data_nascita, gruppo_sanguigno, via)
+	VALUES ( 	'SRRMNL94P02H501D','000126' ,1, 'manuel', 'sorrenti', 1, '02/09/1994', 'B','Via trieste n18');
+
+INSERT INTO public."Dipendente"(
+	 cf, matricola, luogo_nascita, nome, cognome, c_residenza, data_nascita, gruppo_sanguigno, via)
+	VALUES ( 	'FRCOFR90P02H501D','000127' ,1, 'francesco', 'ofro', 1, '01/07/1990', '0','Via garibaldi n18');
+
+INSERT INTO public."Dipendente"(
+	 cf, matricola, luogo_nascita, nome, cognome, c_residenza, data_nascita, gruppo_sanguigno, via)
+	VALUES ( 	'TRNGRG99M06L182C','000125' ,1, 'giorgio', 'tranquilli', 1, '06/08/1999', 'AB','Via filippo n18');
+
+INSERT INTO public."Societa"(
+	 nome_societa, p_iva)
+	VALUES ('almawave','012254841');
+
+INSERT INTO public."Societa"(
+	 nome_societa, p_iva)
+	VALUES ('almaviva','0254874125');
+
+INSERT INTO public."Comune"(
+	 citta)
+	VALUES ('frascati' );
+
+INSERT INTO public."Comune"(
+	 citta)
+	VALUES ('milano' );
+
+INSERT INTO public."Comune"(
+	 citta)
+	VALUES ('torino' );
+
+INSERT INTO public."Comune"(
+	 citta)
+	VALUES ('milano' );
+
+INSERT INTO public."Comune"(
+	 citta)
+	VALUES ('roma' );
+
+INSERT INTO public."Dipendente _Studio"(
+	 titolo, id_dipendente, anno_conseguimento, votazione, note)
+	VALUES ( 'laurea', 1, '20/10/2018', 94, null);
+
+INSERT INTO public."Dipendente _Studio"(
+	 titolo, id_dipendente, anno_conseguimento, votazione, note)
+	VALUES ( 'laurea', 0, '20/01/2018', 100, null);
+
+INSERT INTO public."Dipendente _Studio"(
+	 titolo, id_dipendente, anno_conseguimento, votazione, note)
+	VALUES ( 'laurea', 2, '20/01/2018', 77, null);
+
+INSERT INTO public."Area"(
+	 nome, descrizione, id_societa)
+	VALUES ('sicurezza', '----', 1);
+
+INSERT INTO public."Area"(
+	 nome, descrizione, id_societa)
+	VALUES ('poste', '----', 2);
+
+INSERT INTO public."Area_Dipendete"(
+	 id_dipendente, id_area, anno_inizio, anno_fine)
+	VALUES (3, 3, '01-01-2018', '31-12-2018');
+
+INSERT INTO public."Area_Dipendete"(
+	 id_dipendente, id_area, anno_inizio, anno_fine)
+	VALUES (2, 2, '01-01-2018', '31-12-2018');
+
+INSERT INTO public."Area_Dipendete"(
+	 id_dipendente, id_area, anno_inizio, anno_fine)
+	VALUES (1, 2, '01-01-2018', '31-12-2018');
+
+INSERT INTO public.auto_dipendente(
+	 id_dipendente, targa, cilindrata, modello, marca)
+	VALUES ( 1, 'fe254lk', 1200, 'corsa', 'opel');
+
+INSERT INTO public.auto_dipendente(
+	 id_dipendente, targa, cilindrata, modello, marca)
+	VALUES ( 2, 'fe158lk', 1200, 'c3', 'citroen');

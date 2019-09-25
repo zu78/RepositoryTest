@@ -1,0 +1,19 @@
+
+
+
+select cf,matricola,cognome,dipendente.nome,dipendente.data_nascita,nome_societa,
+CASE WHEN CAST(SUBSTRING(cf,10,2)as int)<40 then 'maschio' else 'femmina' end as sesso
+from societa,area_dipendente,area,dipendente
+where dipendente.id=area_dipendente.id_dipendente and area_dipendente.id_area=area.id and area.id_societa=societa.id
+
+
+select nome_societa,count(*) as numero_dipendenti
+from societa,area_dipendente,dipendente,area
+where dipendente.id=area_dipendente.id_dipendente and area_dipendente.id_area=area.id and area.id_societa=societa.id
+group by nome_societa
+
+
+select dipendente.nome,dipendente.cognome,dipendente.matricola
+from dipendente
+where dipendente.id NOT IN(select id_dipendente 
+				    from auto_dipendente)

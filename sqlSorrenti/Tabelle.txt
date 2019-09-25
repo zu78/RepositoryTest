@@ -1,0 +1,99 @@
+CREATE TABLE public.area
+(
+    id integer NOT NULL DEFAULT nextval('"Area_id_seq"'::regclass),
+    nome character varying COLLATE pg_catalog."default",
+    descrizione character varying COLLATE pg_catalog."default",
+    id_societa integer,
+    CONSTRAINT "Area_pkey" PRIMARY KEY (id),
+    CONSTRAINT id_societa FOREIGN KEY (id_societa)
+        REFERENCES public.societa (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+CREATE TABLE public.area_dipendente
+(
+    id integer NOT NULL DEFAULT nextval('"Area_Dipendete_id_seq"'::regclass),
+    id_dipendente integer NOT NULL,
+    id_area integer NOT NULL,
+    anno_inizio date,
+    anno_fine date,
+    CONSTRAINT "Area_Dipendete_pkey" PRIMARY KEY (id),
+    CONSTRAINT id_area FOREIGN KEY (id_area)
+        REFERENCES public.area (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT id_dipendente FOREIGN KEY (id_dipendente)
+        REFERENCES public.dipendente (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+CREATE TABLE public.auto_dipendente
+(
+    id integer NOT NULL DEFAULT nextval('auto_dipendente_id_seq'::regclass),
+    id_dipendente integer NOT NULL,
+    targa character varying COLLATE pg_catalog."default",
+    cilindrata integer,
+    modello character varying COLLATE pg_catalog."default",
+    marca character varying COLLATE pg_catalog."default",
+    CONSTRAINT auto_dipendente_pkey PRIMARY KEY (id),
+    CONSTRAINT id_dipendente FOREIGN KEY (id_dipendente)
+        REFERENCES public.dipendente (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+CREATE TABLE public.comune
+(
+    id integer NOT NULL DEFAULT nextval('"Comune_id_seq"'::regclass),
+    citta character varying COLLATE pg_catalog."default",
+    CONSTRAINT "Comune_pkey" PRIMARY KEY (id)
+)
+
+CREATE TABLE public.dipendente
+(
+    id integer NOT NULL DEFAULT nextval('"Dipendente_id_seq"'::regclass),
+    cf character varying(16) COLLATE pg_catalog."default",
+    matricola character varying(10) COLLATE pg_catalog."default",
+    luogo_nascita integer NOT NULL,
+    nome character varying(100) COLLATE pg_catalog."default",
+    cognome character varying(100) COLLATE pg_catalog."default",
+    c_residenza integer NOT NULL,
+    data_nascita date,
+    gruppo_sanguigno character varying(5) COLLATE pg_catalog."default",
+    via character varying(200) COLLATE pg_catalog."default",
+    CONSTRAINT "Dipendente_pkey" PRIMARY KEY (id),
+    CONSTRAINT c_residenza FOREIGN KEY (c_residenza)
+        REFERENCES public.comune (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT luogo_nascita FOREIGN KEY (luogo_nascita)
+        REFERENCES public.comune (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+CREATE TABLE public.dipendente_studio
+(
+    id integer NOT NULL DEFAULT nextval('dipendente_studio_id_seq'::regclass),
+    titolo character varying COLLATE pg_catalog."default",
+    anno_conseguimento date,
+    note character varying COLLATE pg_catalog."default",
+    id_dipendente integer,
+    votazione integer,
+    CONSTRAINT dipendente_studio_pkey PRIMARY KEY (id),
+    CONSTRAINT id_dipendente FOREIGN KEY (id_dipendente)
+        REFERENCES public.dipendente (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+
+CREATE TABLE public.societa
+(
+    id integer NOT NULL DEFAULT nextval('"Societa_id_seq"'::regclass),
+    nome_societa character varying COLLATE pg_catalog."default",
+    p_iva character varying COLLATE pg_catalog."default",
+    CONSTRAINT "Societa_pkey" PRIMARY KEY (id)
+)
